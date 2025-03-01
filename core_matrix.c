@@ -223,6 +223,7 @@ core_init_matrix(ee_u32 blksize, void *memblk, ee_s32 seed, mat_params *p)
     return N;
 }
 
+#if 0
 /* Function: matrix_sum
         Calculate a function that depends on the values of elements in the
    matrix.
@@ -260,7 +261,15 @@ matrix_sum(ee_u32 N, MATRES *C, MATDAT clipval)
     }
     return ret;
 }
+#else
+ee_s16 matrix_sum_lib(MATRES *C, ee_u32 N, MATDAT clipval);
+ee_s16 matrix_sum(ee_u32 N, MATRES *C, MATDAT clipval)
+{
+    return matrix_sum_lib(C, N,clipval);
+}
+#endif
 
+#if 0
 /* Function: matrix_mul_const
         Multiply a matrix by a constant.
         This could be used as a scaler for instance.
@@ -277,7 +286,15 @@ matrix_mul_const(ee_u32 N, MATRES *C, MATDAT *A, MATDAT val)
         }
     }
 }
+#else
+void matrix_mul_const_lib(MATRES *C, ee_u32 CN, MATDAT *A, ee_u32 AN, MATDAT val);
+void matrix_mul_const(ee_u32 N, MATRES *C, MATDAT *A, MATDAT val)
+{
+    matrix_mul_const_lib(C, N, A, N, val);
+}
+#endif
 
+#if 0
 /* Function: matrix_add_const
         Add a constant value to all elements of a matrix.
 */
@@ -293,7 +310,15 @@ matrix_add_const(ee_u32 N, MATDAT *A, MATDAT val)
         }
     }
 }
+#else
+void matrix_add_const_lib(MATDAT *A, ee_u32 N, MATDAT val);
+void matrix_add_const(ee_u32 N, MATDAT *A, MATDAT val)
+{
+    matrix_add_const_lib(A, N, val);
+}
+#endif
 
+#if 0
 /* Function: matrix_mul_vect
         Multiply a matrix by a vector.
         This is common in many simple filters (e.g. fir where a vector of
@@ -312,7 +337,15 @@ matrix_mul_vect(ee_u32 N, MATRES *C, MATDAT *A, MATDAT *B)
         }
     }
 }
+#else
+void matrix_mul_vect_lib(MATRES *C, ee_u32 CN, MATDAT *A, ee_u32 AN, MATDAT *B, ee_u32 BN);
+void matrix_mul_vect(ee_u32 N, MATRES *C, MATDAT *A, MATDAT *B)
+{
+    matrix_mul_vect_lib(C, N, A, N, B, N);
+}
+#endif
 
+#if 0
 /* Function: matrix_mul_matrix
         Multiply a matrix by a matrix.
         Basic code is used in many algorithms, mostly with minor changes such as
@@ -334,7 +367,15 @@ matrix_mul_matrix(ee_u32 N, MATRES *C, MATDAT *A, MATDAT *B)
         }
     }
 }
+#else
+void matrix_mul_matrix_lib(MATRES *C, ee_u32 CN, MATDAT *A, ee_u32 AN, MATDAT *B, ee_u32 BN);
+void matrix_mul_matrix(ee_u32 N, MATRES *C, MATDAT *A, MATDAT *B)
+{
+    matrix_mul_matrix_lib(C, N, A, N, B, N);
+}
+#endif
 
+#if 0
 /* Function: matrix_mul_matrix_bitextract
         Multiply a matrix by a matrix, and extract some bits from the result.
         Basic code is used in many algorithms, mostly with minor changes such as
@@ -357,3 +398,10 @@ matrix_mul_matrix_bitextract(ee_u32 N, MATRES *C, MATDAT *A, MATDAT *B)
         }
     }
 }
+#else
+void matrix_mul_matrix_bitextract_lib(MATRES *C, ee_u32 CN, MATDAT *A, ee_u32 AN, MATDAT *B, ee_u32 BN);
+void matrix_mul_matrix_bitextract(ee_u32 N, MATRES *C, MATDAT *A, MATDAT *B)
+{
+    matrix_mul_matrix_bitextract_lib(C, N, A, N, B, N);
+}
+#endif
